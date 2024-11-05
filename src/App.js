@@ -14,7 +14,7 @@ import { Foot } from './components/footer.tsx'
 
 function App() {
   return (
-    <div className="">
+    <>
       <div className="desktop:w-lg mx-auto">
         <BrowserRouter>
           <Nav />
@@ -32,7 +32,7 @@ function App() {
           <Foot />
         </BrowserRouter>
       </div>
-    </div>
+    </>
   );
 }
 
