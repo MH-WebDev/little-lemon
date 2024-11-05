@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+@layer base {
+    @font-face {
+    font-family: 'Markazi Text', serif;
+    src: url("./assets/fonts/Markazi_Text/MarkaziText-VariableFont_wght.ttf") format("truetype");
+    }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
+  @font-face {
+    font-family: 'Karla', serif;
+    src: url("./assets/fonts/Karla/Karla-VariableFont_wght.ttf") format("truetype");
+    }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    .display-title {
+        font-family: theme(fontFamily.markazi);
+        font-size: 64px;
+        font-weight: 500;
+    }
+
+    .sub-title {
+        font-family: theme(fontFamily.markazi);
+        font-size: 40px;
+        font-weight: 300;
+    }
+
+    .lead-text {
+        font-family: theme(fontFamily.karla);
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .section-title {
+        font-family: theme(fontFamily.karla);
+        font-size: 20px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+    .section-category {
+        font-family: theme(fontFamily.karla);
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .card-title {
+        font-family: theme(fontFamily.karla);
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .paragraph {
+        font-family: theme(fontFamily.karla);
+        font-size: 16px;
+        line-height: "1.5";
+        font-weight: 400;
+    }
+    .highlight {
+        font-family: theme(fontFamily.karla);
+        font-size: 40px;
+        font-weight: 500;
+    }
 }
