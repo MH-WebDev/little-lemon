@@ -1,7 +1,7 @@
 import Button from "./button";
 import food from "../assets/img/bruchetta.svg"
 
-export default function Header() {
+export default function CallToAction() {
     return(
     <header className="bg-green">
         <div className="grid grid-cols-1 tablet:grid-cols-2 p-6">

@@ -5,18 +5,21 @@ const testimonialData = [
     {
         "id": "0",
         "name": "Anonymous",
+        "rating": 5,
         "image": "../assets/img/ai-header-4.jpg",
         "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus risus non dui elementum tempus."
     },
     {
         "id": "1",
         "name": "Barry",
+        "rating": 5,
         "image": "../assets/img/ai-header-4.jpg",
         "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus risus non dui elementum tempus."
     },
     {
         "id": "2",
         "name": "Evelyn",
+        "rating": 3,
         "image": "../assets/img/ai-header-4.jpg",
         "review": "Help i'm trapped in a bowl of soup!"
     },

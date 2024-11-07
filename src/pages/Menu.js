@@ -1,5 +1,5 @@
 export default function Menu() {
     return(
-        <p>Menu</p>
+        <p className="section-category text-center py-12">Menu</p>
     )
 }

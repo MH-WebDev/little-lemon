@@ -2,9 +2,9 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Nav from './components/nav';
+import Nav from './components/Nav';
 import { Foot } from './components/footer'
-import Header from './components/header';
+import CallToAction from './components/CallToAction';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -22,7 +22,7 @@ function App() {
       <div className="desktop:w-lg mx-auto pb-10">
         <BrowserRouter>
           <Nav />
-          <Header />
+          <CallToAction />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/index" element={<Home />} />

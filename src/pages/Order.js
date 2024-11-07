@@ -1,5 +1,5 @@
 export default function Order() {
     return(
-        <p>Order Online</p>
+        <p className="section-category text-center py-12">Order Online</p>
     )
 }

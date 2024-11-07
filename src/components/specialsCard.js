@@ -47,7 +47,7 @@ export default function SpecialsCard() {
     return(
         <>
             {specials.map((special) => (
-                <div className="rounded-2xl bg-light-grey w-[350px] mx-auto shadow-lg hover:scale-105 duration-300 ease-in-out">
+                <div className="rounded-2xl bg-light-grey w-[350px] mx-auto my-8 shadow-lg hover:scale-105 duration-300 ease-in-out">
                     <div key={special.id}>
                         <img src={image} alt={special.name} className="rounded-t-2xl"/>
                         <div className="flex flex-row justify-between px-3 py-6 align-items">

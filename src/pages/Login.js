@@ -1,5 +1,5 @@
 export default function Login() {
     return(
-        <p>Login</p>
+        <p className="section-category text-center py-12">Login</p>
     )
 }
