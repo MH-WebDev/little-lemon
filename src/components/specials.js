@@ -4,7 +4,7 @@ import SpecialsCard from "./specialsCard"
 export default function Specials() {
     return(
         <div>
-            <div className="flex flex-row justify-between px-6 items-center">
+            <div className="flex flex-row justify-between p-6 items-center">
                 <h1 className="sub-title">Specials</h1>
                 <div>
                 <Button buttonText="Online Menu" />

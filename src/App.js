@@ -19,7 +19,7 @@ import NoPage from './pages/NoPage';
 function App() {
   return (
     <>
-      <div className="desktop:w-lg mx-auto">
+      <div className="desktop:w-lg mx-auto pb-10">
         <BrowserRouter>
           <Nav />
           <Header />
