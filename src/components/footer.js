@@ -11,10 +11,10 @@ export function Foot() {
     <footer>
       <div className="w-full rounded-b-[16px] bg-green shadow p-6 text-white">
         <div className="flex flex-row justify-between align-middle px-6">
-          <div className="my-auto">
+          <div className="my-auto hidden tablet:block">
             <img src={logo} alt="Logo" width="100px" />
           </div>
-          <div className="grid grid-cols-3 gap-8 paragraph py-6">
+          <div className="grid grid-cols-1 text-center mx-auto tablet:text-left tablet:mx-0 tablet:grid-cols-3 gap-8 paragraph py-6">
             <div className="flex flex-col">
               <h3 className="section-category pb-4">Navigation</h3>
               <NavLink to="/index">Home</NavLink>

@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        'readable': '65ch',
+      },
       fontFamily: {
         'karla': ['Karla'],
         'markazi': ['"Markazi Text"'],

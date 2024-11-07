@@ -1,5 +1,9 @@
+import Specials from "../components/specials"
+
 export default function Home() {
     return(
-        <p>Home!</p>
+        <section className="py-6">
+            <Specials />
+        </section>
     )
 }

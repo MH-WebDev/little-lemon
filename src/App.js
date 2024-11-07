@@ -1,7 +1,11 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Nav from './components/nav';
+import { Foot } from './components/footer'
+import Header from './components/header';
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Menu from './pages/Menu';
@@ -10,7 +14,7 @@ import Order from './pages/Order';
 import Login from './pages/Login';
 import NoPage from './pages/NoPage';
 
-import { Foot } from './components/footer.tsx'
+
 
 function App() {
   return (
@@ -18,6 +22,7 @@ function App() {
       <div className="desktop:w-lg mx-auto">
         <BrowserRouter>
           <Nav />
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/index" element={<Home />} />
@@ -28,7 +33,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
-          <p className="section-title">Hello</p>
           <Foot />
         </BrowserRouter>
       </div>
