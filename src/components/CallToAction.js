@@ -17,8 +17,8 @@ export default function CallToAction() {
                     <Button buttonText="Book a table"/>
                 </div>
             </div>
-           <div className="mx-auto py-10 tablet:py-0 tablet:order-3 ">
-            <img src={food} alt="Delicious food arrangement from Little Lemon" width="500px" className="drop-shadow-lg"/>
+           <div className="mx-auto py-10 tablet:py-0 tablet:order-3">
+            <img src={food} alt="Delicious food arrangement from Little Lemon" className="drop-shadow-lg h-full rounded-2xl tablet:rounded-none"/>
            </div>
         </div>
     </header>

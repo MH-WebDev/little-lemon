@@ -9,7 +9,7 @@ import CallToAction from './components/CallToAction';
 import Home from './pages/Home';
 import About from './pages/About';
 import Menu from './pages/Menu';
-import Booking from './pages/Booking';
+import BookingPage from './pages/BookingPage';
 import Order from './pages/Order';
 import Login from './pages/Login';
 import NoPage from './pages/NoPage';
@@ -28,7 +28,7 @@ function App() {
             <Route path="/index" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/booking" element={<Booking />} />
+            <Route path="/booking" element={<BookingPage />} />
             <Route path="/order" element={<Order />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<NoPage />} />
