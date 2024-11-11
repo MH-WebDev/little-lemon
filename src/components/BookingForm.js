@@ -59,9 +59,9 @@ export default function BookingForm({
                     name="bookingDate"
                     className="border rounded-lg h-10 text-center"
                     onChange={(e) => {
-                      const selectedDate = e.target.value;
-                      setFieldValue("bookingDate", selectedDate);
-                      dispatch({ type: 'UPDATE_TIMES', payload: { date: selectedDate } });
+                        const selectedDate = e.target.value;
+                        setFieldValue("bookingDate", selectedDate);
+                        dispatch({ type: 'UPDATE_TIMES', payload: { date: selectedDate } }); // This should now work correctly
                     }}
                   />
                   <ErrorMessage name="bookingDate" component="div" className="error" />

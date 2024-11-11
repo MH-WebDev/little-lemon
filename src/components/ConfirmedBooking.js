@@ -2,12 +2,11 @@ import logo from "../assets/img/Logo.svg";
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
 
-export default function PopUp({ onClose }) {
-  const [openModal, setOpenModal] = useState(true);
+export default function ConfirmedBooking() {
 
   return (
     <div>
-      <div className="" show={openModal} onClose={() => { setOpenModal(false); onClose(); }}>
+      <div className="">
         <img src={logo} alt="Little Lemon Logo" width="200px" className="mx-auto pt-6" />
         <div className="space-y-6 py-10">
           <h2 className="text-center sub-title py-6">Booking request received!</h2>

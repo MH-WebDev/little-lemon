@@ -24,8 +24,7 @@ module.exports = {
         'sm': '350px',
         'md': '768px',
       },
-    },
-    colors: {
+      colors: {
       "black": "#000000",
       "white": "#FFFFFF",
       "green": "#495E57",
@@ -35,6 +34,8 @@ module.exports = {
       "light-grey": "#EDEFEE",
       "dark-grey": "#333333",
     }
+    },
+    
   },
   plugins: [],
 }

@@ -1,4 +1,4 @@
-import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import portrait1 from "../assets/img/ai-header-4.jpg";
 
 const testimonialData = [
@@ -34,7 +34,7 @@ export default function TestimonialCard() {
                         <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
                     </div>
                     <div className="flex flex-row justify-between">
-                        <img src={portrait1} alt="User Photo" className="w-[100px] rounded-lg"/>
+                        <img src={portrait1} alt="User" className="w-[100px] rounded-lg"/>
                         <div className="text-center mx-auto">
                             <h3 className="card-title">{testimonial.name}</h3>
                         </div>

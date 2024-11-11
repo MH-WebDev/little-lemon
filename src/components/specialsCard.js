@@ -1,5 +1,4 @@
 import image from '../assets/img/greek salad.jpg'
-import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom'
 
 const specials = [
@@ -27,28 +26,12 @@ const specials = [
 ]
 
 export default function SpecialsCard() {
-    // const [specials, setSpecials] = useState([]);
-
-    // useEffect(() => {
-    //     const loadImages = async () => {
-    //         const loadedSpecials = await Promise.all(
-    //             specialsData.map(async (special) => {
-    //                 const image = require(`${special.image}`);
-    //                 return {...special, image};
-    //             })
-    //         );
-    //         setSpecials(loadedSpecials);
-    //         console.log("Loaded Specials");
-    //     };
-    //     loadImages();
-    //     console.log("Loaded Images");
-    // }, []);
 
     return(
         <>
             {specials.map((special) => (
-                <div className="rounded-2xl bg-light-grey w-[350px] mx-auto my-8 shadow-lg hover:scale-105 duration-300 ease-in-out">
-                    <div key={special.id}>
+                <div key={special.id} className="rounded-2xl bg-light-grey w-[350px] mx-auto my-8 shadow-lg hover:scale-105 duration-300 ease-in-out">
+                    <div>
                         <img src={image} alt={special.name} className="rounded-t-2xl"/>
                         <div className="flex flex-row justify-between px-3 py-6 align-items">
                             <h2 className="section-category">{special.name}</h2>
