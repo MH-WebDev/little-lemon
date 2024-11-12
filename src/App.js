@@ -13,7 +13,7 @@ import BookingPage from './pages/BookingPage';
 import Order from './pages/Order';
 import Login from './pages/Login';
 import NoPage from './pages/NoPage';
-
+import ConfirmedBooking from './pages/ConfirmedBooking';
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/order" element={<Order />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/booking-confirmed" element={<ConfirmedBooking />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
           <Foot />

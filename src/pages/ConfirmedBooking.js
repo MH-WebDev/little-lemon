@@ -1,5 +1,5 @@
 import logo from "../assets/img/Logo.svg";
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from 'react-router-dom';
 
 export default function ConfirmedBooking() {
@@ -14,7 +14,7 @@ export default function ConfirmedBooking() {
             Thank you for making a booking request at Little Lemon! You will soon receive an email to confirm your reservation details.
           </p>
         </div>
-        <NavLink to="/index" className="bg-yellow rounded-lg px-24 py-2 my-6 w-1/2 mx-auto section-category drop-shadow-md inline-block hover:scale-110 duration-300 ease-in-out text-center">Home</NavLink>
+        <NavLink to="/index" className="block bg-yellow rounded-lg px-24 py-2 my-6 w-1/4 mx-auto section-category drop-shadow-md hover:scale-110 duration-300 ease-in-out text-center">Home</NavLink>
       </div>
     </div>
   );

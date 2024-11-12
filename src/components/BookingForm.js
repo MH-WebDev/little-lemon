@@ -9,7 +9,8 @@ export default function BookingForm({
   setFormValues,
   handleFormSubmit,
   availableTimes,
-  dispatch
+  dispatch,
+  submitForm
 }) {
   const validationSchemas = [
     Yup.object({
@@ -32,8 +33,13 @@ export default function BookingForm({
         initialValues={formValues}
         validationSchema={validationSchemas[step - 1]}
         onSubmit={(values) => {
-          setFormValues(values);
-          handleFormSubmit(values);
+            setFormValues(values);
+            if (step === 2) {
+            // Call submitForm with form data on final step
+            submitForm(values);
+            } else {
+            handleFormSubmit(values); // Continue to the next step
+            }
         }}
       >
         {({ setFieldValue }) => (

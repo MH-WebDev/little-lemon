@@ -1,26 +1,25 @@
 import { FaStar } from "react-icons/fa";
-import portrait1 from "../assets/img/ai-header-4.jpg";
 
 const testimonialData = [
     {
         "id": "0",
         "name": "Anonymous",
         "rating": 5,
-        "image": "../assets/img/ai-header-4.jpg",
+        "image": "https://i.imgur.com/PjLtRlc.png",
         "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus risus non dui elementum tempus."
     },
     {
         "id": "1",
         "name": "Barry",
         "rating": 5,
-        "image": "../assets/img/ai-header-4.jpg",
+        "image": "https://i.imgur.com/2R6wIHD.png",
         "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus risus non dui elementum tempus."
     },
     {
         "id": "2",
         "name": "Evelyn",
         "rating": 3,
-        "image": "../assets/img/ai-header-4.jpg",
+        "image": "https://i.imgur.com/piJEmTp.jpeg",
         "review": "Help i'm trapped in a bowl of soup!"
     },
 ]
@@ -34,7 +33,7 @@ export default function TestimonialCard() {
                         <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
                     </div>
                     <div className="flex flex-row justify-between">
-                        <img src={portrait1} alt="User" className="w-[100px] rounded-lg"/>
+                        <img src={testimonial.image} alt="User" className="w-[100px] rounded-lg"/>
                         <div className="text-center mx-auto">
                             <h3 className="card-title">{testimonial.name}</h3>
                         </div>

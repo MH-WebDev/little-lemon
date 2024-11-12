@@ -1,13 +1,13 @@
 import React, { useState, useReducer } from 'react';
 import BookingForm from "../components/BookingForm.js";
 import food from "../assets/img/restaurantfood.jpg";
-import PopUp from '../components/PopUp';
-import { fetchAPI } from '../Api.js'
+import { fetchAPI, submitAPI } from '../Api.js'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function BookingPage() {
   const [step, setStep] = useState(1);
-  const [showModal, setShowModal] = useState(false); // Modal state for booking confirmation
+  const navigate = useNavigate();
 
   const updateTimes = (availableTimes, { payload }) => {
     const dateObject = new Date(payload.date); // Convert date string to Date object
@@ -32,12 +32,26 @@ export default function BookingPage() {
     specialRequirements: ''
   });
 
+  const submitForm = (values) => {
+    const formData = values;
+    const success = submitAPI(formData);
+
+    if (success) {
+      console.log('Form submitted successfully:', formData);
+      navigate('/booking-confirmed');
+      // Optionally reset the form or navigate to a confirmation page
+    } else {
+      console.error('Form submission failed');
+      // Handle submission error as needed
+    }
+  };
+
   const handleFormSubmit = (values) => {
     if (step === 1) {
       setStep(step + 1);
     } else {
-      // Show the modal when form is completed
-      setShowModal(true);
+      console.log('Final Form Values:', values);
+      submitForm(values);  // Call submitForm to handle submission
     }
   };
 
@@ -60,15 +74,13 @@ export default function BookingPage() {
             handleFormSubmit={handleFormSubmit}
             availableTimes={availableTimes}
             dispatch={dispatch}
+            submitForm={submitForm}
           />
         </div>
         <div className="py-12 w-full hidden tablet:block">
           <img src={food} alt="A plate of food being served" className="max-w-auto px-12"/>
         </div>
       </div>
-
-      {/* Conditionally render the PopUp modal */}
-      {showModal && <PopUp onClose={() => setShowModal(false)} />}
     </>
   );
 }
