@@ -3,7 +3,7 @@ import owners2 from "../assets/img/Mario_and_Adrian_B.jpg";
 
 export default function About() {
     return(
-        <div className="grid grid-cols-1 tablet:grid-cols-2 py-20 items-center">
+        <section className="grid grid-cols-1 tablet:grid-cols-2 py-20 items-center">
             <div className="px-10">
                 <div className="">
                     <h1 className="display-title text-black p-0 pt-6 m-0 leading-7">Little Lemon</h1>
@@ -17,6 +17,6 @@ export default function About() {
                 <img src={owners2} alt="Owners Mario and Adrian" width="450px" className="tablet:absolute mx-auto tablet:-top-20 tablet:-left-28 drop-shadow-lg"/>
                 <img src={owners1} alt="Owners Mario and Adrian" width="450px" className="hidden tablet:block tablet:absolute tablet:-top-48 tablet:left-28 -z-10 drop-shadow-md"/>
             </div>
-        </div>
+        </section>
     )
 }

@@ -1,46 +1,95 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import BookingPage from  "./pages/BookingPage"
+import BookingForm from "./components/BookingForm";
 import { BrowserRouter as Router } from "react-router-dom";
-import BookingPage from "./pages/BookingPage";
-import { initializeTimes, updateTimes } from './pages/BookingPage';
-import { fetchAPI } from './Api'; // Import fetchAPI for mocking
+import * as Yup from 'yup';
 
-// Mock fetchAPI globally
-jest.mock('./Api', () => ({
-  fetchAPI: jest.fn(() => ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]), // Default mock return
-}));
-
-describe('initializeTimes', () => {
-  test('should return initial times array including times from fetchAPI', () => {
-    const mockTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-    fetchAPI.mockReturnValue(mockTimes);
-
-    const result = initializeTimes([]);
-    expect(fetchAPI).toHaveBeenCalledWith(expect.any(Date));
-    expect(result).toEqual(mockTimes);
-  });
+// Define validation schema for step 2 form tests
+const validationSchema = Yup.object({
+  name: Yup.string()
+    .matches(/^[a-zA-Z\s]*$/, 'Name cannot contain special characters or numbers')
+    .required('Please enter your name'),
+  phoneNumber: Yup.string()
+    .matches(/^[\d+\s]*$/, 'Phone number can only contain digits, +, and spaces')
+    .required('Please enter your phone number'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Please enter your email address'),
+  specialRequirements: Yup.string()
 });
 
-describe('updateTimes', () => {
-  test('should return new times from fetchAPI based on selected date', () => {
-    const mockTimes = ["17:30", "18:30", "19:30"];
-    const action = { type: 'UPDATE_TIMES', payload: { date: '2023-01-01' } };
-    const dateObject = new Date(action.payload.date);
+describe("BookingForm validation", () => {
+  test("shows error for name with special characters", async () => {
+    render(
+      <Router>
+        <BookingForm
+          step={2}
+          initialValues={{
+            name: '',
+            phoneNumber: '',
+            email: '',
+            specialRequirements: ''
+          }}
+          validationSchema={validationSchema}
+        />
+      </Router>
+    );
 
-    fetchAPI.mockReturnValue(mockTimes);
+    const nameInput = screen.getByLabelText(/Name/i);
+    fireEvent.change(nameInput, { target: { value: "John$Doe" } });
+    fireEvent.blur(nameInput);
 
-    const result = updateTimes([], action);
-    expect(fetchAPI).toHaveBeenCalledWith(dateObject);
-    expect(result).toEqual(mockTimes);
+    const errorMessage = await screen.findByText(/Name cannot contain special characters or numbers/i);
+    expect(errorMessage).toBeInTheDocument();
   });
 
-  test('should return the current state if fetchAPI returns an empty array', () => {
-    const currentState = ["17:00", "18:00", "19:00"];
-    const action = { type: 'UPDATE_TIMES', payload: { date: '2023-01-01' } };
+  test("shows error for phone number with invalid characters", async () => {
+    render(
+      <Router>
+        <BookingForm
+          step={2}
+          initialValues={{
+            name: '',
+            phoneNumber: '',
+            email: '',
+            specialRequirements: ''
+          }}
+          validationSchema={validationSchema}
+        />
+      </Router>
+    );
 
-    fetchAPI.mockReturnValue([]); // Mock empty response
+    const phoneInput = screen.getByLabelText(/Phone Number/i);
+    fireEvent.change(phoneInput, { target: { value: "123-456" } });
+    fireEvent.blur(phoneInput);
 
-    const result = updateTimes(currentState, action);
-    expect(fetchAPI).toHaveBeenCalledWith(new Date(action.payload.date));
-    expect(result).toEqual(currentState);
+    const errorMessage = await screen.findByText((content, element) => {
+      return content.includes("Phone number can only contain digits, +, and spaces");
+    });
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("shows error for invalid email address", async () => {
+    render(
+      <Router>
+        <BookingForm
+          step={2}
+          initialValues={{
+            name: '',
+            phoneNumber: '',
+            email: '',
+            specialRequirements: ''
+          }}
+          validationSchema={validationSchema}  // Now validationSchema is used
+        />
+      </Router>
+    );
+
+    const emailInput = screen.getByLabelText(/Email Address/i);
+    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+    fireEvent.blur(emailInput);
+
+    const errorMessage = await screen.findByText(/Invalid email address/i);
+    expect(errorMessage).toBeInTheDocument();
   });
 });

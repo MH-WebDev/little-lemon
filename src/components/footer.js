@@ -43,10 +43,10 @@ export function Foot() {
               <p>Martin Hussey 2024</p>
             </div>
             <div className="flex flex-row gap-8">
-              <BsInstagram />
-              <BsFacebook />
-              <BsTwitter />
-              <SiTripadvisor />
+              <a href="http://instagram.com" aria-label="instagram"><BsInstagram /></a>
+              <a href="http://facebook.com" aria-label="facebook"><BsFacebook /></a>
+              <a href="http://twitter.com" aria-label="twitter"><BsTwitter /></a>
+              <a href="http://tripadvisor.com" aria-label="trip advisor"><SiTripadvisor /></a>
             </div>
           </div>
       </div>

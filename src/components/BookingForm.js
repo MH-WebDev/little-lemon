@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from './button';
+import DOMPurify from 'dompurify';
 
 export default function BookingForm({
   step,
@@ -10,36 +11,52 @@ export default function BookingForm({
   handleFormSubmit,
   availableTimes,
   dispatch,
-  submitForm
+  submitForm,
+  initialValues,      // Add initialValues prop for testing
+  validationSchema,   // Add validationSchema prop for testing
 }) {
   const validationSchemas = [
     Yup.object({
-      numberOfDiners: Yup.number().required('Please select the number of diners').min(1).max(10),
-      bookingDate: Yup.date().required('Please select a booking date').min(new Date(), 'Date must be in the future'),
+      numberOfDiners: Yup.number()
+        .required('Please select the number of diners')
+        .min(1, 'Please select at least 1 diner')
+        .max(10, 'Maximum of 10 diners'),
+      bookingDate: Yup.date()
+        .required('Please select a booking date')
+        .min(new Date(), 'Date must be in the future'),
       bookingTime: Yup.string().required('Please select a booking time'),
-      seatingPreference: Yup.array().min(1, 'Please select at least one seating preference').required('Please select seating preference')
+      seatingPreference: Yup.array()
+        .min(1, 'Please select at least one seating preference')
+        .required('Please select seating preference')
     }),
     Yup.object({
-      name: Yup.string().required('Please enter your name'),
-      phoneNumber: Yup.string().required('Please enter your phone number'),
-      email: Yup.string().email('Invalid email address').required('Please enter your email address'),
-      specialRequirements: Yup.string() // Optional field, no validation needed
+      name: Yup.string()
+        .matches(/^[a-zA-Z\s]*$/, 'Name cannot contain special characters or numbers')
+        .required('Please enter your name'),
+      phoneNumber: Yup.string()
+        .matches(/^[\d+\s]*$/, 'Phone number can only contain digits, +, and spaces')
+        .required('Please enter your phone number'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Please enter your email address'),
+      specialRequirements: Yup.string()
+        .transform((value) => DOMPurify.sanitize(value)) // Sanitize input to prevent XSS attacks
     })
   ];
 
   return (
-    <div className="lead-text uppercase" aria-label="Booking Form">
+    <section className="lead-text uppercase" aria-label="Booking Form">
       <Formik
-        initialValues={formValues}
-        validationSchema={validationSchemas[step - 1]}
+        initialValues={initialValues || formValues} 
+        validationSchema={validationSchema || validationSchemas[step - 1]} 
         onSubmit={(values) => {
-            setFormValues(values);
-            if (step === 2) {
-            // Call submitForm with form data on final step
+          setFormValues(values);
+          if (step === 2) {
+            // Call submitForm with form data on the final step
             submitForm(values);
-            } else {
+          } else {
             handleFormSubmit(values); // Continue to the next step
-            }
+          }
         }}
       >
         {({ setFieldValue }) => (
@@ -56,7 +73,7 @@ export default function BookingForm({
                       </option>
                     ))}
                   </Field>
-                  <ErrorMessage name="numberOfDiners" component="div" className="error" />
+                  <ErrorMessage name="numberOfDiners" component="div" className="error text-red-600" />
                 </div>
                 <div className="flex flex-col py-3">
                   <label htmlFor="bookingDate" className="pb-2">Booking Date*</label>
@@ -70,7 +87,7 @@ export default function BookingForm({
                         dispatch({ type: 'UPDATE_TIMES', payload: { date: selectedDate } }); // This should now work correctly
                     }}
                   />
-                  <ErrorMessage name="bookingDate" component="div" className="error" />
+                  <ErrorMessage name="bookingDate" component="div" className="error text-red-600" />
                 </div>
                 <div className="flex flex-col py-3">
                   <label htmlFor="bookingTime" className="pb-2">Booking Time*</label>
@@ -80,19 +97,19 @@ export default function BookingForm({
                       <option key={index} value={time}>{time}</option>
                     ))}
                   </Field>
-                  <ErrorMessage name="bookingTime" component="div" className="error" />
+                  <ErrorMessage name="bookingTime" component="div" className="error text-red-600" />
                 </div>
                 <div className="flex flex-col py-3">
                   <label className="pb-2">Seating Preference</label>
                   <div className="grid grid-cols-2">
                     {['Birthday', 'Anniversary', 'Wedding', 'Other'].map((seating) => (
                       <label key={seating}>
-                        <Field type="checkbox" name="seatingPreference" value={seating} className="mx-6" />
+                        <Field type="checkbox" name="seatingPreference" value={seating} className="mx-6 text-red-600" />
                         {seating}
                       </label>
                     ))}
                   </div>
-                  <ErrorMessage name="seatingPreference" component="div" className="error" />
+                  <ErrorMessage name="seatingPreference" component="div" className="error text-red-600" />
                 </div>
               </>
             )}
@@ -101,22 +118,22 @@ export default function BookingForm({
               <>
                 <div className="flex flex-col py-3">
                   <label htmlFor="name" className="pb-2">Name*</label>
-                  <Field type="text" name="name" className="border rounded-lg h-10 text-center" />
-                  <ErrorMessage name="name" component="div" className="error" />
+                  <Field id="name" type="text" name="name" className="border rounded-lg h-10 text-center" />
+                  <ErrorMessage name="name" component="div" className="error text-red-600" />
                 </div>
                 <div className="flex flex-col py-3">
                   <label htmlFor="phoneNumber" className="pb-2">Phone Number*</label>
-                  <Field type="text" name="phoneNumber" className="border rounded-lg h-10 text-center" />
-                  <ErrorMessage name="phoneNumber" component="div" className="error" />
+                  <Field id="phoneNumber" type="text" name="phoneNumber" className="border rounded-lg h-10 text-center" />
+                  <ErrorMessage name="phoneNumber" component="div" className="error text-red-600" />
                 </div>
                 <div className="flex flex-col py-3">
                   <label htmlFor="email" className="pb-2">Email Address*</label>
-                  <Field type="email" name="email" className="border rounded-lg h-10 text-center" />
-                  <ErrorMessage name="email" component="div" className="error" />
+                  <Field id="email" type="email" name="email" className="border rounded-lg h-10 text-center" />
+                  <ErrorMessage name="email" component="div" className="error text-red-600" />
                 </div>
                 <div className="flex flex-col py-3">
                   <label htmlFor="specialRequirements" className="pb-2">Special Requirements (Optional)</label>
-                  <Field as="textarea" name="specialRequirements" className="border rounded-lg h-10 text-center" />
+                  <Field id="specialRequirements" as="textarea" name="specialRequirements" className="border rounded-lg h-10 text-center" />
                 </div>
               </>
             )}
@@ -127,6 +144,6 @@ export default function BookingForm({
           </Form>
         )}
       </Formik>
-    </div>
+    </section>
   );
 }

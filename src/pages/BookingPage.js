@@ -5,7 +5,7 @@ import { fetchAPI, submitAPI } from '../Api.js'
 import { useNavigate } from 'react-router-dom';
 
 export const updateTimes = (availableTimes, { payload }) => {
-  const dateObject = new Date(payload.date); // Convert date string to Date object
+  const dateObject = new Date(payload.date); // Converts the input date string to Date object
   const response = fetchAPI(dateObject);
   return response.length !== 0 ? response : availableTimes;
 };
@@ -17,8 +17,6 @@ export const initializeTimes = (initialAvailableTimes) => [
 export default function BookingPage() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
-
-  
 
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
 
