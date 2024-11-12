@@ -6,7 +6,7 @@ const seededRandom = (seed) => {
     return () => (s = (s * a) % m) / m;
 };
 
-const fetchAPI = (date) => {
+export const fetchAPI = (date) => {
     const daySeed = date.getDate();
     const monthSeed = date.getMonth() + 1;
     const yearSeed = date.getFullYear();
@@ -23,6 +23,5 @@ const fetchAPI = (date) => {
     return result;
   };
 
-const submitAPI = (formData) => true;
+export const submitAPI = (formData) => true;
 
-export { fetchAPI, submitAPI };

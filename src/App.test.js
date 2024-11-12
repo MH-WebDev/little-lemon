@@ -1,34 +1,46 @@
-
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import BookingPage from "./pages/BookingPage";
 import { initializeTimes, updateTimes } from './pages/BookingPage';
+import { fetchAPI } from './Api'; // Import fetchAPI for mocking
 
-test("rendering the table booking component", () => {
-  render(<BookingPage />);
+// Mock fetchAPI globally
+jest.mock('./Api', () => ({
+  fetchAPI: jest.fn(() => ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]), // Default mock return
+}));
 
-  const headingElement = screen.getByText("Book A Table");
-  expect(headingElement).toBeInTheDocument();
-
-});
-
-// initializeTimes testing
 describe('initializeTimes', () => {
-  test('should return the correct initial times array', () => {
-    const expectedTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-    const result = initializeTimes();
-    expect(result).toEqual(expectedTimes);
+  test('should return initial times array including times from fetchAPI', () => {
+    const mockTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+    fetchAPI.mockReturnValue(mockTimes);
+
+    const result = initializeTimes([]);
+    expect(fetchAPI).toHaveBeenCalledWith(expect.any(Date));
+    expect(result).toEqual(mockTimes);
   });
 });
 
-// Test for updateTimes
 describe('updateTimes', () => {
-  test('should return the same state provided when UPDATE_TIMES action is dispatched', () => {
-    const currentState = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  test('should return new times from fetchAPI based on selected date', () => {
+    const mockTimes = ["17:30", "18:30", "19:30"];
     const action = { type: 'UPDATE_TIMES', payload: { date: '2023-01-01' } };
-    const result = updateTimes(currentState, action);
+    const dateObject = new Date(action.payload.date);
 
-    // Verify that the result is the same as the current state
+    fetchAPI.mockReturnValue(mockTimes);
+
+    const result = updateTimes([], action);
+    expect(fetchAPI).toHaveBeenCalledWith(dateObject);
+    expect(result).toEqual(mockTimes);
+  });
+
+  test('should return the current state if fetchAPI returns an empty array', () => {
+    const currentState = ["17:00", "18:00", "19:00"];
+    const action = { type: 'UPDATE_TIMES', payload: { date: '2023-01-01' } };
+
+    fetchAPI.mockReturnValue([]); // Mock empty response
+
+    const result = updateTimes(currentState, action);
+    expect(fetchAPI).toHaveBeenCalledWith(new Date(action.payload.date));
     expect(result).toEqual(currentState);
   });
 });

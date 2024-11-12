@@ -4,20 +4,21 @@ import food from "../assets/img/restaurantfood.jpg";
 import { fetchAPI, submitAPI } from '../Api.js'
 import { useNavigate } from 'react-router-dom';
 
+export const updateTimes = (availableTimes, { payload }) => {
+  const dateObject = new Date(payload.date); // Convert date string to Date object
+  const response = fetchAPI(dateObject);
+  return response.length !== 0 ? response : availableTimes;
+};
+
+export const initializeTimes = (initialAvailableTimes) => [
+...initialAvailableTimes, ...fetchAPI(new Date()),
+];
 
 export default function BookingPage() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
-  const updateTimes = (availableTimes, { payload }) => {
-    const dateObject = new Date(payload.date); // Convert date string to Date object
-    const response = fetchAPI(dateObject);
-    return response.length !== 0 ? response : availableTimes;
-  };
-
-  const initializeTimes = (initialAvailableTimes) => [
-  ...initialAvailableTimes, ...fetchAPI(new Date()),
-  ];
+  
 
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
 
